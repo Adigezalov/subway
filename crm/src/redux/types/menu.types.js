@@ -1,0 +1,6 @@
+module.exports = {
+	FETCH_MENU: 'MENU/FETCH_MENU',
+	CREATE: 'MENU/CREATE',
+	EDIT: 'MENU/EDIT',
+	CLEAN: 'MENU/CLEAN',
+}

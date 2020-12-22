@@ -1,0 +1,51 @@
+export const defaultWeek = [
+	{
+		name: 'понедельник',
+		alias: 'monday',
+		from: '10:00',
+		to: '22:00',
+		isWorkingDay: true,
+	},
+	{
+		name: 'вторник',
+		alias: 'tuesday',
+		from: '10:00',
+		to: '22:00',
+		isWorkingDay: true,
+	},
+	{
+		name: 'среда',
+		alias: 'wednesday',
+		from: '10:00',
+		to: '22:00',
+		isWorkingDay: true,
+	},
+	{
+		name: 'четверг',
+		alias: 'thursday',
+		from: '10:00',
+		to: '22:00',
+		isWorkingDay: true,
+	},
+	{
+		name: 'пятница',
+		alias: 'friday',
+		from: '10:00',
+		to: '22:00',
+		isWorkingDay: true,
+	},
+	{
+		name: 'суббота',
+		alias: 'saturday',
+		from: '10:00',
+		to: '22:00',
+		isWorkingDay: true,
+	},
+	{
+		name: 'воскресенье',
+		alias: 'sunday',
+		from: '10:00',
+		to: '22:00',
+		isWorkingDay: true,
+	},
+]

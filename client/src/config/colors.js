@@ -1,0 +1,10 @@
+module.exports = {
+	COLOR_SUBWAY_WHITE: 'rgba(256, 256, 256, 1)',
+	COLOR_SUBWAY_GREEN: 'rgba(0, 137, 56, 1)',
+	COLOR_SUBWAY_YELLOW: 'rgba(245, 196, 0, 1)',
+	COLOR_SUBWAY_RED: 'rgba(221, 55, 5, 1)',
+	COLOR_SUBWAY_DARK_GREEN: 'rgba(0, 87, 45, 1)',
+	COLOR_SUBWAY_LIGHT_GREEN: 'rgba(139, 205, 50, 1)',
+	COLOR_SUBWAY_ORANGE: 'rgba(255, 130, 0, 1)',
+	COLOR_INACTIVE: 'rgba(133, 133, 133, 1)',
+}
