@@ -246,6 +246,33 @@ export function fetchProductsAction() {
 	}
 }
 
+export function fetchPromotionsAction() {
+	return async (dispatch, getStat) => {
+		try {
+			dispatch(showLoaderAction())
+			const response = await axios({
+				method: 'GET',
+				url: `${API_URL}/api/promotion`,
+				headers: {
+					Authorization: getStat().app.token,
+				},
+			})
+			if (response.error) {
+				dispatch(showErrorAction(response.error))
+			} else {
+				dispatch({
+					type: types.FETCH_PROMOTIONS,
+					payload: response.data,
+				})
+			}
+			dispatch(hideLoaderAction())
+		} catch (e) {
+			dispatch(showErrorAction(e.response.data.error ? e.response.data.error : e.response.data))
+			dispatch(hideLoaderAction())
+		}
+	}
+}
+
 export function cleanDataForMenuAction() {
 	return {
 		type: types.CLEAN,

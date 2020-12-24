@@ -11,6 +11,7 @@ const initialState = {
 	spices: [],
 	units: [],
 	products: [],
+	promotions: [],
 }
 
 export const dataForMenuReducer = (state = initialState, action) => {
@@ -33,6 +34,8 @@ export const dataForMenuReducer = (state = initialState, action) => {
 			return {...state, units: action.payload}
 		case types.FETCH_PRODUCTS:
 			return {...state, products: action.payload}
+		case types.FETCH_PROMOTIONS:
+			return {...state, promotions: action.payload}
 		case types.CLEAN:
 			return initialState
 		case LOGOUT:

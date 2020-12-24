@@ -83,6 +83,9 @@ const AddedComponent = ({
 							<RemoveIcon color={'secondary'} />
 						</IconButton>
 					</Box>
+
+					{/*111*/}
+
 					{withPrice ? (
 						<Box
 							style={{

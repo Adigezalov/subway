@@ -10,6 +10,7 @@ import {
 	fetchExtrasAction,
 	fetchMenuItemsAction,
 	fetchProductsAction,
+	fetchPromotionsAction,
 	fetchSaucesAction,
 	fetchSpicesAction,
 	fetchUnitsAction,
@@ -18,6 +19,7 @@ import {
 import {TabPanel} from '../../components/TabPanel'
 import ItemsPanel from './Items.panel'
 import {cleanMenuAction, createMenuAction, fetchMenuAction} from '../../redux/actions/menu.actions'
+import PromotionsPanel from './Promotions.panel'
 
 const a11yProps = index => {
 	return {
@@ -38,6 +40,7 @@ const MenuPage = () => {
 	const commonSpices = useSelector(state => state.dataForMenu.spices)
 	const commonUnits = useSelector(state => state.dataForMenu.units)
 	const commonProducts = useSelector(state => state.dataForMenu.products)
+	const commonPromotions = useSelector(state => state.dataForMenu.promotions)
 	const menu = useSelector(state => state.menu.menu)
 	const [value, setValue] = useState(0)
 	const [menuItems, setMenuItems] = useState([])
@@ -50,6 +53,7 @@ const MenuPage = () => {
 	const [footLongs, setFootLongs] = useState([])
 	const [salads, setSalads] = useState([])
 	const [wraps, setWraps] = useState([])
+	const [promotions, setPromotions] = useState([])
 
 	useEffect(() => {
 		dispatch(fetchMenuItemsAction())
@@ -61,6 +65,7 @@ const MenuPage = () => {
 		dispatch(fetchSpicesAction())
 		dispatch(fetchUnitsAction())
 		dispatch(fetchProductsAction())
+		dispatch(fetchPromotionsAction())
 		dispatch(fetchMenuAction({restaurant: id}))
 		return () => {
 			dispatch(cleanMenuAction())
@@ -79,6 +84,7 @@ const MenuPage = () => {
 		menu && menu._id && setFootLongs(menu.footLongs)
 		menu && menu._id && setSalads(menu.salads)
 		menu && menu._id && setWraps(menu.wraps)
+		menu && menu._id && setPromotions(menu.promotions)
 	}, [menu])
 
 	const handleChangeTab = (event, newValue) => {
@@ -214,7 +220,6 @@ const MenuPage = () => {
 		setItems(items.slice())
 	}
 	const activeModifierSubItem = (items, index, indexValue, field, setItems, id, value) => {
-		console.log(index)
 		items[index].items.map(item => {
 			if (item[field] === id) {
 				let isNew = true
@@ -457,10 +462,115 @@ const MenuPage = () => {
 	}
 	//Конец работы с продуктами
 
+	//Начало работы с акциями
+	const addPromotion = promotion => {
+		promotions.push({
+			promotion: promotion._id,
+			position: promotion.position,
+			active: true,
+			price: 0,
+			assemblyDiagram: '',
+			modifiers: [],
+		})
+		promotions.map((promotion, i) => {
+			promotion.position = i
+		})
+		setPromotions(promotions.slice())
+	}
+	const changePositionPromotion = (id, oldPosition, newPosition) => {
+		promotions.map(promotion => {
+			if (promotion.promotion === id) {
+				promotion.position = newPosition
+			} else {
+				if (newPosition - oldPosition < 0) {
+					if (promotion.position >= newPosition && promotion.position < oldPosition) {
+						promotion.position += 1
+					}
+				}
+				if (newPosition - oldPosition > 0) {
+					if (promotion.position <= newPosition && promotion.position > oldPosition) {
+						promotion.position -= 1
+					}
+				}
+			}
+		})
+		setPromotions(promotions.slice())
+	}
+	const activePromotion = (id, active) => {
+		promotions.map(promotion => {
+			if (promotion.promotion === id) {
+				promotion.active = active
+			}
+		})
+		setPromotions(promotions.slice())
+	}
+	const removePromotion = id => {
+		const newPromotions = promotions.filter(promotion => promotion.promotion !== id).slice()
+		newPromotions.map((newPromotions, i) => {
+			newPromotions.position = i
+		})
+		setPromotions(newPromotions.slice())
+	}
+	const changePricePromotion = (id, price) => {
+		promotions.map(promotion => {
+			if (promotion.promotion === id) {
+				promotion.price = price
+			}
+		})
+		setPromotions(promotions.slice())
+	}
+	const changeAssemblyDiagramPromotion = (id, assemblyDiagram) => {
+		promotions.map(promotion => {
+			if (promotion.promotion === id) {
+				promotion.assemblyDiagram = assemblyDiagram
+			}
+		})
+		setPromotions(promotions.slice())
+	}
+	const activeModifierPromotion = (id, value) => {
+		promotions.map(promotion => {
+			if (promotion.promotion === id) {
+				let isNew = true
+				promotion.modifiers.map(modifier => {
+					if (modifier.value === value) {
+						isNew = false
+					}
+				})
+				if (isNew) {
+					promotion.modifiers.push({
+						value: value,
+						surcharge: 0,
+						active: true,
+					})
+				} else {
+					promotion.modifiers.map(modifier => {
+						if (modifier.value === value) {
+							modifier.active = !modifier.active
+						}
+					})
+				}
+			}
+		})
+		setPromotions(promotions.slice())
+	}
+	const changePriceModifierPromotion = (id, value, surcharge) => {
+		promotions.map(promotion => {
+			if (promotion.promotion === id) {
+				promotion.modifiers.map(modifier => {
+					if (modifier.value === value) {
+						modifier.surcharge = surcharge
+					}
+				})
+			}
+		})
+		setPromotions(promotions.slice())
+	}
+	//Конец работы с акциями
+
 	const createMenu = () => {
 		dispatch(
 			createMenuAction({
-				menu: {menuItems, breads, extras, vegetables, sauces, spices, sixInches, footLongs, salads, wraps},
+				menu: {menuItems, breads, extras, vegetables, sauces, spices, sixInches, footLongs, salads, wraps, promotions},
 				restaurant: id,
 				menuId: menu && menu._id ? menu._id : false,
 			})
@@ -671,23 +781,23 @@ const MenuPage = () => {
 						</TabPanel>
 					)
 				})}
-			{/*<TabPanel value={value} index={9}>*/}
-			{/*	<ItemsPanel*/}
-			{/*			isProduct*/}
-			{/*			isWrap*/}
-			{/*			withPrice*/}
-			{/*			commonItems={commonUnits.filter(unit => unit.isWrap)}*/}
-			{/*			commonAssemblyDiagrams={commonAssemblyDiagrams}*/}
-			{/*			items={wraps}*/}
-			{/*			field={'unit'}*/}
-			{/*			addItem={addWrap}*/}
-			{/*			removeItem={removeWrap}*/}
-			{/*			changePositionItem={changePositionWrap}*/}
-			{/*			activeItem={activeWrap}*/}
-			{/*			changePriceItem={changePriceWrap}*/}
-			{/*			changeAssemblyDiagramItem={changeAssemblyDiagramWrap}*/}
-			{/*	/>*/}
-			{/*</TabPanel>*/}
+
+			<TabPanel value={value} index={menuItems.length + 10}>
+				<PromotionsPanel
+					promotions={promotions}
+					commonPromotions={commonPromotions}
+					addPromotion={addPromotion}
+					commonAssemblyDiagrams={commonAssemblyDiagrams}
+					changePositionPromotion={changePositionPromotion}
+					activePromotion={activePromotion}
+					removePromotion={removePromotion}
+					changePricePromotion={changePricePromotion}
+					changeAssemblyDiagramPromotion={changeAssemblyDiagramPromotion}
+					activeModifierPromotion={activeModifierPromotion}
+					changePriceModifierPromotion={changePriceModifierPromotion}
+				/>
+			</TabPanel>
+
 			<Box position={'fixed'} bottom={10} left={0} right={0} pl={1} pr={1}>
 				<Button variant='contained' color={'primary'} fullWidth onClick={createMenu}>
 					Сохранить

@@ -1,9 +1,6 @@
 import React, {useRef, useState} from 'react'
-import {Avatar, Box, Checkbox, Divider, IconButton, InputAdornment, List, ListItem, MenuItem, Paper, TextField, Typography} from '@material-ui/core'
-import AddIcon from '@material-ui/icons/Add'
-import RemoveIcon from '@material-ui/icons/Remove'
+import {Box, Divider, List} from '@material-ui/core'
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd'
-import {API_URL} from '../../config/config'
 import UnaddedComponent from './Unadded.component'
 import AddedComponent from './Added.component'
 
