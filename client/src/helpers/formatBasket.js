@@ -5,7 +5,9 @@ function orderCard(product, activeVegetables) {
 	let productToTelegram = ''
 	let name = product.product.unit
 		? `✔️ *${product.product.unit.name.toUpperCase()}`
-		: `✔️ *${product.product.product.name.toUpperCase()}`
+		: product.product.product
+		? `✔️ *${product.product.product.name.toUpperCase()}`
+		: `✔️ *${product.product.promotion.name.toUpperCase()}`
 	if (!!product.modifiers.length) {
 		product.modifiers.map((modifier, i) => {
 			name = name + ` ${modifier.name.toUpperCase()}`

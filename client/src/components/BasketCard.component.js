@@ -50,7 +50,11 @@ const BasketCardComponent = ({product, removeProductFromBasket}) => {
 		setActiveVegetables(qty)
 	}, [])
 
-	let name = product.product.unit ? `${product.product.unit.name}` : `${product.product.product.name}`
+	let name = product.product.unit
+		? `${product.product.unit.name}`
+		: product.product.product
+		? `${product.product.product.name}`
+		: `${product.product.promotion.name}`
 	product.modifiers.length &&
 		product.modifiers.map((modifier, i) => {
 			name = name + ` ${modifier.name}`

@@ -89,6 +89,13 @@ export function setCommentAction(comment) {
 	}
 }
 
+export function setIsPromotionAction(isPromotion) {
+	return {
+		type: types.SET_IS_PROMOTION,
+		payload: isPromotion,
+	}
+}
+
 export function cleanOrderAction() {
 	return {
 		type: types.CLEAN_ORDER,

@@ -1,7 +1,6 @@
 const Model = require('../models/menu.model')
 const helpers = require('../helpers')
 const errorText = require('../errorText')
-const fs = require('fs')
 
 module.exports.getByRestaurantForClient = async function (req, res, next) {
 	try {
@@ -35,6 +34,8 @@ module.exports.getByRestaurantForClient = async function (req, res, next) {
 				'-alias -imageFootLong -imageSalad -imageSixInch -isFootLong -isSalad -isSixInch -isWrap -position -__v' +
 					' -_id'
 			)
+			.populate('promotions.promotion', '-alias -position -__v -_id')
+			.populate('promotions.assemblyDiagram', '-name -position -__v -_id')
 			.select('-user -__v -_id')
 
 		if (item) {

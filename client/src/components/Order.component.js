@@ -171,7 +171,8 @@ const OrderComponent = ({restaurant, order, sendOrder}) => {
 							width:
 								restaurant.pickup &&
 								restaurant.delivery &&
-								timeToTimestamp(restaurant.timeForStopDelivery)
+								timeToTimestamp(restaurant.timeForStopDelivery) &&
+								!order.isPromotion
 									? '45%'
 									: '90%',
 							backgroundColor: order && !order.service ? colors.COLOR_SUBWAY_LIGHT_GREEN : 'transparent',
@@ -192,13 +193,17 @@ const OrderComponent = ({restaurant, order, sendOrder}) => {
 						</p>
 					</div>
 				) : null}
-				{restaurant && restaurant.delivery && timeToTimestamp(restaurant.timeForStopDelivery) ? (
+				{restaurant &&
+				restaurant.delivery &&
+				timeToTimestamp(restaurant.timeForStopDelivery) &&
+				!order.isPromotion ? (
 					<div
 						style={Object.assign({}, styles.serviceItem, {
 							width:
 								restaurant.pickup &&
 								restaurant.delivery &&
-								timeToTimestamp(restaurant.timeForStopDelivery)
+								timeToTimestamp(restaurant.timeForStopDelivery) &&
+								!order.isPromotion
 									? '45%'
 									: '90%',
 							backgroundColor: order && order.service ? colors.COLOR_SUBWAY_LIGHT_GREEN : 'transparent',

@@ -12,6 +12,7 @@ import {unitReducer} from './unit.reducer'
 import {userReducer} from './user.reducer'
 import {paymentOptionReducer} from './patmenOption.reducer'
 import {promotionReducer} from './promotion.reducer'
+import {restaurantReducer} from './restaurant.reducer'
 
 export const rootReducer = combineReducers({
 	app: appReducer,
@@ -27,4 +28,5 @@ export const rootReducer = combineReducers({
 	user: userReducer,
 	paymentOption: paymentOptionReducer,
 	promotion: promotionReducer,
+	restaurant: restaurantReducer,
 })

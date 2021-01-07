@@ -7,7 +7,7 @@ const controller = require('../controllers/restaurant.controller')
 router.get('/', passport.authenticate(`jwt`, {session: false}, null), controller.getAll)
 router.get('/client', controller.getAllForClient)
 router.get('/:id', passport.authenticate('jwt', {session: false}, null), controller.getById)
-router.get('/client/:id', controller.getAllForClientById)
+router.get('/client/:id', controller.getForClientById)
 router.post('/', passport.authenticate('jwt', {session: false}, null), upload.single('image'), controller.create)
 router.post(
 	'/activate/:id',
@@ -15,6 +15,7 @@ router.post(
 	upload.single('image'),
 	controller.activate
 )
+router.post('/paid/:id', passport.authenticate('jwt', {session: false}, null), upload.single('image'), controller.paid)
 router.patch('/:id', passport.authenticate('jwt', {session: false}, null), upload.single('image'), controller.update)
 router.delete('/:id', passport.authenticate('jwt', {session: false}, null), controller.delete)
 

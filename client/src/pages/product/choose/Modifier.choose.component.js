@@ -6,9 +6,13 @@ import {setModifierAction} from '../../../redux/actions/product.actions'
 
 const ModifierChooseComponent = () => {
 	const dispatch = useDispatch()
-	const modifierProduct = useSelector(state => state.product.modifiers) //добавленные
-	const modifiers = useSelector(state => state.product.product.product.modifiers) //те что есть в основной базе
-	const activeModifiers = useSelector(state => state.product.product.modifiers) //активные
+	const modifierProduct = useSelector(state => state.product.modifiers)
+	const modifiers = useSelector(state =>
+		state.product.product.product
+			? state.product.product.product.modifiers
+			: state.product.product.promotion.modifiers
+	)
+	const activeModifiers = useSelector(state => state.product.product.modifiers)
 
 	const setChoose = modifier => {
 		dispatch(setModifierAction(modifier))

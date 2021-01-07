@@ -7,7 +7,7 @@ import BasketCardComponent from '../components/BasketCard.component'
 import {removeProductFromBasketAction} from '../redux/actions/basket.actions'
 import {useToasts} from 'react-toast-notifications'
 import ModalComponent from '../components/Modal.component'
-import {cleanOrderAction, sendOrderAction} from '../redux/actions/order.actions'
+import {cleanOrderAction, sendOrderAction, setIsPromotionAction} from '../redux/actions/order.actions'
 import OrderComponent from '../components/Order.component'
 import {formatBasket} from '../helpers/formatBasket'
 
@@ -70,6 +70,16 @@ const CartPage = () => {
 			})
 		setActiveVegetables(qty)
 	}, [])
+
+	useEffect(() => {
+		basket.map((menuItem, i) => {
+			if (menuItem.alias === 'promotions') {
+				if (!menuItem.values.length) {
+					dispatch(setIsPromotionAction(false))
+				}
+			}
+		})
+	}, [basket])
 
 	const removeProductFromBasket = (menuItemIndex, productIndex) => {
 		dispatch(removeProductFromBasketAction(menuItemIndex, productIndex))

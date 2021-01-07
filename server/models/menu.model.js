@@ -146,6 +146,28 @@ const menuSchema = new Schema({
 			price: {type: Number},
 		},
 	],
+	promotions: [
+		{
+			promotion: {
+				ref: 'promotions',
+				type: Schema.Types.ObjectId,
+			},
+			assemblyDiagram: {
+				ref: 'assemblyDiagrams',
+				type: Schema.Types.ObjectId,
+			},
+			modifiers: [
+				{
+					value: {type: String},
+					surcharge: {type: Number},
+					active: {type: Boolean},
+				},
+			],
+			position: {type: Number},
+			active: {type: Boolean},
+			price: {type: Number},
+		},
+	],
 	restaurant: {
 		ref: 'restaurants',
 		type: Schema.Types.ObjectId,

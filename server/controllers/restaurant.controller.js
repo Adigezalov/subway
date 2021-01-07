@@ -1,7 +1,6 @@
 const Model = require('../models/restaurant.model')
 const helpers = require('../helpers')
 const errorText = require('../errorText')
-const fs = require('fs')
 
 module.exports.getAllForClient = async function (req, res, next) {
 	try {
@@ -14,7 +13,7 @@ module.exports.getAllForClient = async function (req, res, next) {
 	}
 }
 
-module.exports.getAllForClientById = async function (req, res, next) {
+module.exports.getForClientById = async function (req, res, next) {
 	try {
 		const item = await Model.findById(req.params.id)
 			.populate('user', '-password -restaurateur -admin -email -__v -_id')
@@ -22,7 +21,11 @@ module.exports.getAllForClientById = async function (req, res, next) {
 		if (item.active && item.paid) {
 			res.status(200).json(item)
 		} else {
-			helpers.clientErrorHandler(res, 400, errorText.ERROR_2)
+			helpers.clientErrorHandler(
+				res,
+				400,
+				`Ресторан Subway ${item.name} временно недоступен. Пожалуйста, перезагрузите страницу.`
+			)
 		}
 	} catch (error) {
 		helpers.errorHandler(res, error)
@@ -32,7 +35,13 @@ module.exports.getAllForClientById = async function (req, res, next) {
 module.exports.getAll = async function (req, res, next) {
 	if (req.user.admin || req.user.restaurateur) {
 		try {
-			const items = await Model.find({user: req.user._id}).sort({position: 1})
+			let items = []
+			if (req.user.admin) {
+				items = await Model.find().sort({position: 1})
+			}
+			if (req.user.restaurateur) {
+				items = await Model.find({user: req.user._id}).sort({position: 1})
+			}
 			res.status(200).json(items)
 		} catch (error) {
 			helpers.errorHandler(res, error)
@@ -132,12 +141,11 @@ module.exports.update = async function (req, res, next) {
 }
 
 module.exports.activate = async function (req, res, next) {
-	console.log()
 	if (req.user.admin || req.user.restaurateur) {
 		try {
 			const updatable = await Model.findOne({_id: req.params.id})
 
-			if (`${updatable.user}` === `${req.user._id}`) {
+			if (`${updatable.user}` === `${req.user._id}` || req.user.admin) {
 				const updated = {
 					active: req.body.active,
 					number: updatable.number,
@@ -149,6 +157,23 @@ module.exports.activate = async function (req, res, next) {
 			} else {
 				helpers.clientErrorHandler(res, 400, errorText.ERROR_2)
 			}
+		} catch (error) {
+			helpers.errorHandler(res, error)
+		}
+	} else {
+		helpers.clientErrorHandler(res, 400, errorText.ERROR_2)
+	}
+}
+
+module.exports.paid = async function (req, res, next) {
+	if (req.user.admin) {
+		try {
+			const updated = {
+				paid: req.body.paid,
+			}
+
+			const item = await Model.findOneAndUpdate({_id: req.params.id}, {$set: updated}, {new: true})
+			res.status(200).json(item)
 		} catch (error) {
 			helpers.errorHandler(res, error)
 		}

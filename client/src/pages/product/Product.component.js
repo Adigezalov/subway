@@ -16,6 +16,7 @@ import QuantityChooseComponent from './choose/Quantity.choose.component'
 
 const styles = {
 	selectedProductImage: {
+		padding: '0 10px',
 		width: '100%',
 	},
 	selectedProductImg: {
@@ -55,7 +56,7 @@ const ProductComponent = ({addProductToBasket, setDisabledAddToBasket, setDisabl
 	const productReducer = useSelector(state => state.product)
 	const product = useSelector(state => state.product.product)
 	const diagram = useSelector(state => state.product.product.assemblyDiagram.alias)
-	const field = product.unit ? 'unit' : 'product'
+	const field = product.unit ? 'unit' : product.product ? 'product' : 'promotion'
 
 	useEffect(() => {
 		let disabledAddToBasket = true
@@ -80,11 +81,11 @@ const ProductComponent = ({addProductToBasket, setDisabledAddToBasket, setDisabl
 			disabledAddToBasket = !!productReducer.sauces.length
 		}
 		if (product.modifiers) {
-			if (product.product.modifiers.length !== productReducer.modifiers.length) {
-				product.product.modifiers.map(modifier => {
+			if (product[field].modifiers.length !== productReducer.modifiers.length) {
+				product[field].modifiers.map(modifier => {
 					disabledAddToBasketText = `${disabledAddToBasketText} ${modifier.name}`
 				})
-				disabledAddToBasket = product.product.modifiers.length === productReducer.modifiers.length
+				disabledAddToBasket = product[field].modifiers.length === productReducer.modifiers.length
 			}
 		}
 		setDisabledAddToBasket(disabledAddToBasket)

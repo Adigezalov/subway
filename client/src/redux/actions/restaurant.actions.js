@@ -39,6 +39,10 @@ export function fetchRestaurantAction({id}) {
 			})
 			if (response.error) {
 				dispatch(showErrorAction(response.error))
+				dispatch(setRestaurantAction({restaurant: null}))
+				dispatch(cleanRestaurantAction())
+				dispatch(cleanMenuAction())
+				dispatch(cleanBasketAction())
 			} else {
 				dispatch({
 					type: types.FETCH_RESTAURANT,

@@ -2,6 +2,7 @@ import types from '../types/order.types'
 
 const initialState = {
 	service: false,
+	isPromotion: false,
 	name: null,
 	comment: null,
 	payment: null,
@@ -26,6 +27,8 @@ export const orderReducer = (state = initialState, action) => {
 			return {...state, address: action.payload}
 		case types.SET_USER_TIME:
 			return {...state, userTime: action.payload}
+		case types.SET_IS_PROMOTION:
+			return {...state, isPromotion: action.payload}
 		case types.CLEAN_ORDER:
 			return initialState
 		default:
