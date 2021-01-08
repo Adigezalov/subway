@@ -56,7 +56,7 @@ const PromotionsPage = () => {
 	return (
 		<div style={{flexGrow: 1, display: 'flex', flexDirection: 'column', paddingBottom: footerHeight}}>
 			<div style={{padding: '0 10px', marginBottom: 10}}>
-				<p style={{fontSize: 18, color: colors.COLOR_INACTIVE}}>Внимание! Акция доступна при заказе навынос.</p>
+				<p style={{fontSize: 18, color: colors.COLOR_INACTIVE}}>Внимание! Акции доступны при заказе навынос.</p>
 			</div>
 			{menu &&
 				menu.promotions

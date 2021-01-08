@@ -7,7 +7,12 @@ import BasketCardComponent from '../components/BasketCard.component'
 import {removeProductFromBasketAction} from '../redux/actions/basket.actions'
 import {useToasts} from 'react-toast-notifications'
 import ModalComponent from '../components/Modal.component'
-import {cleanOrderAction, sendOrderAction, setIsPromotionAction} from '../redux/actions/order.actions'
+import {
+	cleanOrderAction,
+	cleanOrderErrorAction,
+	sendOrderAction,
+	setIsPromotionAction,
+} from '../redux/actions/order.actions'
 import OrderComponent from '../components/Order.component'
 import {formatBasket} from '../helpers/formatBasket'
 
@@ -97,7 +102,7 @@ const CartPage = () => {
 	}
 
 	const cleanOrder = () => {
-		dispatch(cleanOrderAction())
+		dispatch(cleanOrderErrorAction())
 		dispatch(setVisibleOrderAction(false))
 	}
 

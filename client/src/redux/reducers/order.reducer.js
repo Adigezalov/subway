@@ -29,6 +29,17 @@ export const orderReducer = (state = initialState, action) => {
 			return {...state, userTime: action.payload}
 		case types.SET_IS_PROMOTION:
 			return {...state, isPromotion: action.payload}
+		case types.CLEAN_ORDER_ERROR:
+			return {
+				...state,
+				service: false,
+				name: null,
+				comment: null,
+				payment: null,
+				phone: null,
+				address: null,
+				userTime: null,
+			}
 		case types.CLEAN_ORDER:
 			return initialState
 		default:

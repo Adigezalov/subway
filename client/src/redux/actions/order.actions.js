@@ -101,3 +101,9 @@ export function cleanOrderAction() {
 		type: types.CLEAN_ORDER,
 	}
 }
+
+export function cleanOrderErrorAction() {
+	return {
+		type: types.CLEAN_ORDER_ERROR,
+	}
+}
