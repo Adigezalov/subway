@@ -5,4 +5,5 @@ module.exports = {
 	DADATA_TOKEN: process.env.DADATA_TOKEN,
 	TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
 	PORT: process.env.APP_PORT,
+	IP: process.env.APP_IP,
 }
