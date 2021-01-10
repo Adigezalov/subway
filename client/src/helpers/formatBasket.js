@@ -32,7 +32,7 @@ function orderCard(product, activeVegetables) {
 		extras = `${extras}\n`
 	}
 	let sauces = `*Соусы:* `
-	if (!product.extras.length) {
+	if (!product.sauces.length) {
 		sauces = sauces + `Без соусов\n`
 	} else {
 		product.sauces.map((sauce, i) => {

@@ -8,7 +8,7 @@ mongoose
 	})
 	.then(() => {
 		app.listen(PORT, IP, err, () => {
-			console.log(`Server started on port ${PORT}`)
+			console.log(`Server started on ${IP} port ${PORT}`)
 		})
 
 		function err(error) {

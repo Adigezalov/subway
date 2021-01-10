@@ -54,6 +54,13 @@ const styles = {
 const MenuListComponent = ({menu, field, setProduct, menuItem}) => {
 	return (
 		<ContainerComponent>
+			{menuItem.alias === 'Razlivnie-napitki' || menuItem.alias === 'Goryachie-napitki' ? (
+				<div style={{padding: '0 10px', marginBottom: 10}}>
+					<p style={{fontSize: 14, color: colors.COLOR_INACTIVE}}>
+						Внимание! {menuItem.name} доступны при заказе навынос.
+					</p>
+				</div>
+			) : null}
 			{menu &&
 				menu
 					.filter(item => item.active)

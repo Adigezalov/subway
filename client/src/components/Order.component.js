@@ -240,6 +240,15 @@ const OrderComponent = ({restaurant, order, sendOrder}) => {
 						<div style={styles.deliveryPaySelector}>{renderPayment()}</div>
 					</>
 				) : null}
+				{restaurant &&
+				restaurant.delivery &&
+				timeToTimestamp(restaurant.timeForStopDelivery) &&
+				order.isPromotion ? (
+					<p style={{fontSize: 14, color: colors.COLOR_SUBWAY_DARK_GREEN, marginBottom: 5}}>
+						Доставка невозможна. Пожалуйста, убедитесь, что в Вашем заказе нет товаров из следующих
+						разделов: Акции, Разливные напитки, Горячие напитки.
+					</p>
+				) : null}
 				<p style={{color: colors.COLOR_SUBWAY_YELLOW, fontSize: 14, marginTop: 5, marginBottom: 10}}>
 					Заполните свои данные
 				</p>

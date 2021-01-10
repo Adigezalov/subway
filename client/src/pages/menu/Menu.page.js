@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {setUrlAction} from '../../redux/actions/app.actions'
+import {setHeaderHeightAction, setUrlAction} from '../../redux/actions/app.actions'
 import {fetchMenuAction} from '../../redux/actions/menu.actions'
 import colors from '../../config/colors'
 import MenuListComponent from './MenuList.component'
@@ -10,6 +10,7 @@ import {cleanProductAction, setProductAction} from '../../redux/actions/product.
 import {addProductToBasketAction} from '../../redux/actions/basket.actions'
 import {useToasts} from 'react-toast-notifications'
 import SwipeableViews from 'react-swipeable-views'
+import {setIsPromotionAction} from '../../redux/actions/order.actions'
 
 const STANDARD_MENU = [
 	{
@@ -112,6 +113,12 @@ const MenuPage = () => {
 	const addProductToBasket = () => {
 		if (disableAddToBasket) {
 			dispatch(addProductToBasketAction(product))
+			if (
+				product.product.menuItem.alias === 'Razlivnie-napitki' ||
+				product.product.menuItem.alias === 'Goryachie-napitki'
+			) {
+				dispatch(setIsPromotionAction(true))
+			}
 			dispatch(cleanProductAction())
 		} else {
 			addToast(disableAddToBasketText, {
@@ -186,7 +193,7 @@ const MenuPage = () => {
 						})}
 			</div>
 			{menu && menu.menuItems ? (
-				<div style={{...styles.swiperContainer, paddingTop: menuHeight}}>
+				<div style={{...styles.swiperContainer, paddingTop: 26}}>
 					<SwipeableViews index={menuItem} onSwitching={index => handleSlideMenu(Math.round(index))}>
 						{STANDARD_MENU.map((item, i) => {
 							return (

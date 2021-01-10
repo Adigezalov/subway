@@ -73,7 +73,7 @@ const BasketCardComponent = ({product, removeProductFromBasket}) => {
 		})
 	}
 	let sauces = `Соусы: `
-	if (!product.extras.length) {
+	if (!product.sauces.length) {
 		sauces = sauces + `Без соусов`
 	} else {
 		product.sauces.map((sauce, i) => {

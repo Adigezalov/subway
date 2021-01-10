@@ -77,13 +77,24 @@ const CartPage = () => {
 	}, [])
 
 	useEffect(() => {
+		let promotionsMenuItem = []
 		basket.map((menuItem, i) => {
-			if (menuItem.alias === 'promotions') {
-				if (!menuItem.values.length) {
-					dispatch(setIsPromotionAction(false))
-				}
+			if (
+				menuItem.alias === 'promotions' ||
+				menuItem.alias === 'Razlivnie-napitki' ||
+				menuItem.alias === 'Goryachie-napitki'
+			) {
+				promotionsMenuItem = basket.filter(
+					item =>
+						item.alias === 'promotions' ||
+						item.alias === 'Razlivnie-napitki' ||
+						item.alias === 'Goryachie-napitki'
+				)
 			}
 		})
+		if (!promotionsMenuItem.length) {
+			dispatch(setIsPromotionAction(false))
+		}
 	}, [basket])
 
 	const removeProductFromBasket = (menuItemIndex, productIndex) => {
