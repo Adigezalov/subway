@@ -51,6 +51,7 @@ export const styles = {
 		borderRadius: '100%',
 		transform: 'rotate(45deg)',
 		zIndex: 200,
+		webkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
 	},
 }
 

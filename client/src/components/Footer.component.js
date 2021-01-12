@@ -42,6 +42,9 @@ export const styles = {
 	footerButtonTextInactive: {
 		color: 'grey',
 	},
+	click: {
+		webkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+	},
 }
 
 const FooterComponent = () => {
@@ -62,7 +65,7 @@ const FooterComponent = () => {
 					gridTemplateColumns: 'repeat(5, 1fr)',
 				}}
 			>
-				<Link to='/'>
+				<Link style={styles.click} to='/'>
 					<div style={styles.footerButton}>
 						<HomeIconComponent color={url === '/' ? colors.COLOR_SUBWAY_RED : colors.COLOR_INACTIVE} />
 						<p style={styles.footerButtonText}>
@@ -72,7 +75,7 @@ const FooterComponent = () => {
 						</p>
 					</div>
 				</Link>
-				<Link to='/promotion'>
+				<Link style={styles.click} to='/promotion'>
 					<div style={styles.footerButton}>
 						<PromotionIconComponent
 							color={url === '/promotion' ? colors.COLOR_SUBWAY_RED : colors.COLOR_INACTIVE}
@@ -90,7 +93,7 @@ const FooterComponent = () => {
 						</p>
 					</div>
 				</Link>
-				<Link to='/restaurants'>
+				<Link style={styles.click} to='/restaurants'>
 					<div style={styles.footerButton}>
 						<RestaurantsIconComponent
 							color={url === '/restaurants' ? colors.COLOR_SUBWAY_RED : colors.COLOR_INACTIVE}
@@ -108,7 +111,7 @@ const FooterComponent = () => {
 						</p>
 					</div>
 				</Link>
-				<Link to='/cart'>
+				<Link style={styles.click} to='/cart'>
 					<div style={styles.footerButton}>
 						<BasketIconComponent
 							color={url === '/cart' ? colors.COLOR_SUBWAY_RED : colors.COLOR_INACTIVE}
@@ -146,7 +149,7 @@ const FooterComponent = () => {
 						) : null}
 					</div>
 				</Link>
-				<Link to='/contacts'>
+				<Link style={styles.click} to='/contacts'>
 					<div style={styles.footerButton}>
 						<PhoneIconComponent
 							color={url === '/contacts' ? colors.COLOR_SUBWAY_RED : colors.COLOR_INACTIVE}

@@ -73,7 +73,7 @@ const styles = {
 		width: '100%',
 		fontFamily: 'SixInch',
 		color: colors.COLOR_SUBWAY_DARK_GREEN,
-		fontSize: 14,
+		fontSize: 16,
 		marginBottom: 5,
 		padding: '10px 15px',
 		borderRadius: 5,
