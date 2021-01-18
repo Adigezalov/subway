@@ -180,20 +180,20 @@ const RestaurantsPage = () => {
 				</YMaps>
 			</div>
 			{selectedRestaurant ? (
-				<ModalComponent title={`Subway ${restaurant.name}`} close={() => setSelectedRestaurant(null)}>
+				<ModalComponent title={`Subway ${selectedRestaurant.name}`} close={() => setSelectedRestaurant(null)}>
 					<ContainerComponent>
 						<p style={styles.contactTitle}>Адрес:</p>
-						<p style={styles.contactContent}>{restaurant && restaurant.address}</p>
+						<p style={styles.contactContent}>{selectedRestaurant && selectedRestaurant.address}</p>
 						<p style={styles.contactTitle}>Телефон:</p>
-						<a style={styles.contactContent} href={`tel:${restaurant && restaurant.phone}`}>
-							{restaurant && restaurant.phone}
+						<a style={styles.contactContent} href={`tel:${selectedRestaurant && selectedRestaurant.phone}`}>
+							{selectedRestaurant && selectedRestaurant.phone}
 						</a>
 						<p style={styles.contactTitle}>Режим работы:</p>
 						{renderSchedule()}
 						<div
 							style={styles.buttonSelect}
 							onClick={() => {
-								dispatch(fetchRestaurantAction({id: restaurant._id}))
+								dispatch(fetchRestaurantAction({id: selectedRestaurant._id}))
 								setSelectedRestaurant(null)
 							}}
 						>

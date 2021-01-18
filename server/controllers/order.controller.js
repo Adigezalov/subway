@@ -94,6 +94,16 @@ module.exports.order = async (req, res) => {
 
 			let sendOrder = await bot.telegram.sendMessage(`-${restaurant.telegramGroupId}`, orderToTelegram, {
 				parse_mode: 'Markdown',
+				// reply_markup: {
+				// 	inline_keyboard: [
+				// 		[
+				// 			{
+				// 				text: 'Принял',
+				// 				callback_data: '1',
+				// 			},
+				// 		],
+				// 	],
+				// },
 			})
 
 			if (!!sendOrder.message_id) {
