@@ -58,6 +58,8 @@ const ProductComponent = ({addProductToBasket, setDisabledAddToBasket, setDisabl
 	const diagram = useSelector(state => state.product.product.assemblyDiagram.alias)
 	const field = product.unit ? 'unit' : product.product ? 'product' : 'promotion'
 
+	console.log(productReducer)
+
 	useEffect(() => {
 		let disabledAddToBasket = true
 		let disabledAddToBasketText = ''
@@ -73,13 +75,13 @@ const ProductComponent = ({addProductToBasket, setDisabledAddToBasket, setDisabl
 			disabledAddToBasketText = 'Выберите овощи для салата'
 			disabledAddToBasket = !!productReducer.vegetables.length
 		}
-		if (
-			diagram === diagrams.PIECE_PRODUCT_AND_ONE_SAUCE ||
-			diagram === diagrams.PIECE_PRODUCT_AND_ONE_SWEET_SAUCE
-		) {
-			disabledAddToBasketText = 'Выберите соус'
-			disabledAddToBasket = !!productReducer.sauces.length
-		}
+		// if (
+		// 	diagram === diagrams.PIECE_PRODUCT_AND_ONE_SAUCE ||
+		// 	diagram === diagrams.PIECE_PRODUCT_AND_ONE_SWEET_SAUCE
+		// ) {
+		// 	disabledAddToBasketText = 'Выберите соус'
+		// 	disabledAddToBasket = !!productReducer.sauces.length
+		// }
 		if (product.modifiers) {
 			if (product[field].modifiers.length !== productReducer.modifiers.length) {
 				product[field].modifiers.map(modifier => {

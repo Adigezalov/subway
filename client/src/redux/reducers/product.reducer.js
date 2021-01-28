@@ -82,8 +82,9 @@ export const productReducer = (state = initialState, action) => {
 					price: state.price + action.payload.price,
 				}
 			} else {
+				const price = state.modifiers[modifierIndex].price
 				state.modifiers.splice(modifierIndex, 1, action.payload)
-				return {...state, modifiers: state.modifiers.slice(), price: state.price - action.payload.price}
+				return {...state, modifiers: state.modifiers.slice(), price: state.price - price + action.payload.price}
 			}
 		case types.SET_UP_QUANTITY:
 			return {...state, quantity: ++state.quantity}
