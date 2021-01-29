@@ -74,7 +74,8 @@ function orderCard(product, activeVegetables) {
 	if (
 		diagram === diagrams.SANDWICH_SIX_INCH ||
 		diagram === diagrams.SANDWICH_FOOT_LONG ||
-		diagram === diagrams.BREAKFAST
+		diagram === diagrams.BREAKFAST ||
+		diagram === diagrams.SANDWICH_WITHOUT_EXTRAS
 	) {
 		productToTelegram += bread
 	}
@@ -82,7 +83,8 @@ function orderCard(product, activeVegetables) {
 		diagram === diagrams.SANDWICH_SIX_INCH ||
 		diagram === diagrams.SANDWICH_FOOT_LONG ||
 		diagram === diagrams.WRAP ||
-		diagram === diagrams.SALAD
+		diagram === diagrams.SALAD ||
+		diagram === diagrams.SANDWICH_WITHOUT_EXTRAS
 	) {
 		productToTelegram += cheese
 	}
@@ -93,7 +95,8 @@ function orderCard(product, activeVegetables) {
 		diagram === diagrams.SANDWICH_SIX_INCH ||
 		diagram === diagrams.SANDWICH_FOOT_LONG ||
 		diagram === diagrams.WRAP ||
-		diagram === diagrams.BREAKFAST
+		diagram === diagrams.BREAKFAST ||
+		diagram === diagrams.SANDWICH_WITHOUT_EXTRAS
 	) {
 		productToTelegram += warmUp
 	}
@@ -109,7 +112,8 @@ function orderCard(product, activeVegetables) {
 		diagram === diagrams.SANDWICH_SIX_INCH ||
 		diagram === diagrams.SANDWICH_FOOT_LONG ||
 		diagram === diagrams.WRAP ||
-		diagram === diagrams.SALAD
+		diagram === diagrams.SALAD ||
+		diagram === diagrams.SANDWICH_WITHOUT_EXTRAS
 	) {
 		productToTelegram += vegetables
 	}
@@ -120,7 +124,8 @@ function orderCard(product, activeVegetables) {
 		diagram === diagrams.SALAD ||
 		diagram === diagrams.BREAKFAST ||
 		diagram === diagrams.PIECE_PRODUCT_AND_ONE_SWEET_SAUCE ||
-		diagram === diagrams.PIECE_PRODUCT_AND_ONE_SAUCE
+		diagram === diagrams.PIECE_PRODUCT_AND_ONE_SAUCE ||
+		diagram === diagrams.SANDWICH_WITHOUT_EXTRAS
 	) {
 		productToTelegram += sauces
 	}
@@ -129,7 +134,8 @@ function orderCard(product, activeVegetables) {
 		diagram === diagrams.SANDWICH_FOOT_LONG ||
 		diagram === diagrams.WRAP ||
 		diagram === diagrams.SALAD ||
-		diagram === diagrams.BREAKFAST
+		diagram === diagrams.BREAKFAST ||
+		diagram === diagrams.SANDWICH_WITHOUT_EXTRAS
 	) {
 		productToTelegram += spices
 	}

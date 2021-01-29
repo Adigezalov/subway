@@ -111,26 +111,30 @@ const BasketCardComponent = ({product, removeProductFromBasket}) => {
 			) : null}
 			{diagram === diagrams.SANDWICH_SIX_INCH ||
 			diagram === diagrams.SANDWICH_FOOT_LONG ||
-			diagram === diagrams.BREAKFAST ? (
+			diagram === diagrams.BREAKFAST ||
+			diagram === diagrams.SANDWICH_WITHOUT_EXTRAS ? (
 				<p style={styles.description}>{bread}</p>
 			) : null}
 			{diagram === diagrams.SANDWICH_SIX_INCH ||
 			diagram === diagrams.SANDWICH_FOOT_LONG ||
 			diagram === diagrams.WRAP ||
-			diagram === diagrams.SALAD ? (
+			diagram === diagrams.SALAD ||
+			diagram === diagrams.SANDWICH_WITHOUT_EXTRAS ? (
 				<p style={styles.description}>{cheese}</p>
 			) : null}
 			{diagram === diagrams.SANDWICH_FOOT_LONG ? <p style={styles.description}>{cut}</p> : null}
 			{diagram === diagrams.SANDWICH_SIX_INCH ||
 			diagram === diagrams.SANDWICH_FOOT_LONG ||
 			diagram === diagrams.WRAP ||
-			diagram === diagrams.BREAKFAST ? (
+			diagram === diagrams.BREAKFAST ||
+			diagram === diagrams.SANDWICH_WITHOUT_EXTRAS ? (
 				<p style={styles.description}>{warmUp}</p>
 			) : null}
 			{diagram === diagrams.SANDWICH_SIX_INCH ||
 			diagram === diagrams.SANDWICH_FOOT_LONG ||
 			diagram === diagrams.WRAP ||
-			diagram === diagrams.SALAD ? (
+			diagram === diagrams.SALAD ||
+			diagram === diagrams.SANDWICH_WITHOUT_EXTRAS ? (
 				<p style={styles.description}>{vegetables}</p>
 			) : null}
 			{diagram === diagrams.SANDWICH_SIX_INCH ||
@@ -145,14 +149,16 @@ const BasketCardComponent = ({product, removeProductFromBasket}) => {
 			diagram === diagrams.SALAD ||
 			diagram === diagrams.BREAKFAST ||
 			diagram === diagrams.PIECE_PRODUCT_AND_ONE_SWEET_SAUCE ||
-			diagram === diagrams.PIECE_PRODUCT_AND_ONE_SAUCE ? (
+			diagram === diagrams.PIECE_PRODUCT_AND_ONE_SAUCE ||
+			diagram === diagrams.SANDWICH_WITHOUT_EXTRAS ? (
 				<p style={styles.description}>{sauces}</p>
 			) : null}
 			{diagram === diagrams.SANDWICH_SIX_INCH ||
 			diagram === diagrams.SANDWICH_FOOT_LONG ||
 			diagram === diagrams.WRAP ||
 			diagram === diagrams.SALAD ||
-			diagram === diagrams.BREAKFAST ? (
+			diagram === diagrams.BREAKFAST ||
+			diagram === diagrams.SANDWICH_WITHOUT_EXTRAS ? (
 				<p style={styles.description}>{spices}</p>
 			) : null}
 			<div style={styles.remove} onClick={removeProductFromBasket}>

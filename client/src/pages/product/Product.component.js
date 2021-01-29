@@ -58,15 +58,14 @@ const ProductComponent = ({addProductToBasket, setDisabledAddToBasket, setDisabl
 	const diagram = useSelector(state => state.product.product.assemblyDiagram.alias)
 	const field = product.unit ? 'unit' : product.product ? 'product' : 'promotion'
 
-	console.log(productReducer)
-
 	useEffect(() => {
 		let disabledAddToBasket = true
 		let disabledAddToBasketText = ''
 		if (
 			diagram === diagrams.SANDWICH_SIX_INCH ||
 			diagram === diagrams.SANDWICH_FOOT_LONG ||
-			diagram === diagrams.BREAKFAST
+			diagram === diagrams.BREAKFAST ||
+			diagram === diagrams.SANDWICH_WITHOUT_EXTRAS
 		) {
 			disabledAddToBasketText = 'Выберите составляющие сэндвича'
 			disabledAddToBasket = !!productReducer.bread
@@ -130,20 +129,23 @@ const ProductComponent = ({addProductToBasket, setDisabledAddToBasket, setDisabl
 
 				{diagram === diagrams.SANDWICH_SIX_INCH ||
 				diagram === diagrams.SANDWICH_FOOT_LONG ||
-				diagram === diagrams.BREAKFAST ? (
+				diagram === diagrams.BREAKFAST ||
+				diagram === diagrams.SANDWICH_WITHOUT_EXTRAS ? (
 					<BreadChooseComponent />
 				) : null}
 				{diagram === diagrams.SANDWICH_SIX_INCH ||
 				diagram === diagrams.SANDWICH_FOOT_LONG ||
 				diagram === diagrams.WRAP ||
-				diagram === diagrams.SALAD ? (
+				diagram === diagrams.SALAD ||
+				diagram === diagrams.SANDWICH_WITHOUT_EXTRAS ? (
 					<CheeseChooseComponent />
 				) : null}
 
 				{diagram === diagrams.SANDWICH_SIX_INCH ||
 				diagram === diagrams.SANDWICH_FOOT_LONG ||
 				diagram === diagrams.WRAP ||
-				diagram === diagrams.BREAKFAST ? (
+				diagram === diagrams.BREAKFAST ||
+				diagram === diagrams.SANDWICH_WITHOUT_EXTRAS ? (
 					<WarmUpChooseComponent />
 				) : null}
 
@@ -152,7 +154,8 @@ const ProductComponent = ({addProductToBasket, setDisabledAddToBasket, setDisabl
 				{diagram === diagrams.SANDWICH_SIX_INCH ||
 				diagram === diagrams.SANDWICH_FOOT_LONG ||
 				diagram === diagrams.WRAP ||
-				diagram === diagrams.SALAD ? (
+				diagram === diagrams.SALAD ||
+				diagram === diagrams.SANDWICH_WITHOUT_EXTRAS ? (
 					<VegetableChooseComponent />
 				) : null}
 
@@ -160,7 +163,8 @@ const ProductComponent = ({addProductToBasket, setDisabledAddToBasket, setDisabl
 				diagram === diagrams.SANDWICH_FOOT_LONG ||
 				diagram === diagrams.WRAP ||
 				diagram === diagrams.SALAD ||
-				diagram === diagrams.BREAKFAST ? (
+				diagram === diagrams.BREAKFAST ||
+				diagram === diagrams.SANDWICH_WITHOUT_EXTRAS ? (
 					<SauceChooseComponent maxQty={3} />
 				) : null}
 
@@ -174,7 +178,8 @@ const ProductComponent = ({addProductToBasket, setDisabledAddToBasket, setDisabl
 				diagram === diagrams.SANDWICH_FOOT_LONG ||
 				diagram === diagrams.WRAP ||
 				diagram === diagrams.SALAD ||
-				diagram === diagrams.BREAKFAST ? (
+				diagram === diagrams.BREAKFAST ||
+				diagram === diagrams.SANDWICH_WITHOUT_EXTRAS ? (
 					<SpiceChooseComponent />
 				) : null}
 
