@@ -61,6 +61,7 @@ export function createExtraAction({editItem}) {
 	let data = new FormData()
 	data.append('name', editItem.name)
 	data.append('image', editItem.image)
+	data.append('weight', editItem.weight)
 	!editItem._id && data.append('alias', editItem.alias)
 
 	return async (dispatch, getStat) => {

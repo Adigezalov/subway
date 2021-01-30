@@ -19,7 +19,7 @@ const styles = {
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'space-around',
-		padding: 2,
+		padding: 5,
 		border: '1px solid',
 		borderColor: colors.COLOR_INACTIVE,
 		borderRadius: 5,
@@ -44,6 +44,16 @@ const styles = {
 		backgroundColor: colors.COLOR_SUBWAY_WHITE,
 		padding: '2px 5px 1px',
 	},
+	weight: {
+		position: 'absolute',
+		top: -8,
+		left: 5,
+		border: '1px solid',
+		borderColor: '#eeeeee',
+		borderRadius: 5,
+		backgroundColor: colors.COLOR_SUBWAY_WHITE,
+		padding: '2px 5px 1px',
+	},
 	positionPrice: {
 		width: '100%',
 		textAlign: 'right',
@@ -53,7 +63,7 @@ const styles = {
 	},
 }
 
-const ChooseCardComponent = ({active, setChoose, image, name, price}) => {
+const ChooseCardComponent = ({active, setChoose, image, name, price, weight}) => {
 	return (
 		<div style={styles.root}>
 			<div
@@ -69,6 +79,11 @@ const ChooseCardComponent = ({active, setChoose, image, name, price}) => {
 					</div>
 				) : null}
 				<p style={styles.positionTitle}>{name}</p>
+				{weight ? (
+					<div style={styles.weight}>
+						<p style={styles.positionPrice}>{weight} гр</p>
+					</div>
+				) : null}
 				{price ? (
 					<div style={styles.price}>
 						<p style={styles.positionPrice}>+ {price} &#8381;</p>

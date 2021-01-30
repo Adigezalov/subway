@@ -84,8 +84,6 @@ const AddedComponent = ({
 						</IconButton>
 					</Box>
 
-					{/*111*/}
-
 					{withPrice ? (
 						<Box
 							style={{

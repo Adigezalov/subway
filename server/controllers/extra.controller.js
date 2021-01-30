@@ -36,6 +36,7 @@ module.exports.create = async function (req, res, next) {
 		const item = new Model({
 			name: req.body.name,
 			alias: req.body.alias,
+			weight: req.body.weight,
 		})
 
 		if (req.file) {

@@ -62,6 +62,7 @@ export function createProductAction({editItem}) {
 	data.append('name', editItem.name)
 	data.append('image', editItem.image)
 	data.append('menuItem', editItem.menuItem)
+	data.append('description', editItem.description)
 	data.append('modifiers', JSON.stringify(editItem.modifiers))
 	!editItem._id && data.append('alias', editItem.alias)
 

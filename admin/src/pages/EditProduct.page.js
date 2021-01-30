@@ -24,7 +24,7 @@ const EditProductPage = () => {
 	const create = useSelector(state => state.app.create)
 	const menuItems = useSelector(state => state.menuItem.menuItems)
 	const [isNew, setIsNew] = useState(false)
-	const [editItem, setEditItem] = useState({name: '', alias: '', image: '', menuItem: ''})
+	const [editItem, setEditItem] = useState({name: '', alias: '', image: '', menuItem: '', description: ''})
 	const [modifiers, setModifiers] = useState([])
 	const [disabled, setDisabled] = useState(true)
 	const [disabledSelect, setDisabledSelect] = useState(true)
@@ -180,6 +180,18 @@ const EditProductPage = () => {
 							</MenuItem>
 						))}
 					</TextField>
+				</Box>
+				<Box mt={2}>
+					<TextField
+						size={'small'}
+						fullWidth
+						variant={'outlined'}
+						label={'Описание'}
+						value={editItem.description}
+						multiline
+						rows={4}
+						onChange={event => handleChangeField(event, 'description')}
+					/>
 				</Box>
 
 				<Box mt={2}>

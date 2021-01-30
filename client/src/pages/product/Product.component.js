@@ -34,6 +34,14 @@ const styles = {
 		color: colors.COLOR_SUBWAY_DARK_GREEN,
 		textAlign: 'right',
 	},
+	selectedProductDescription: {
+		marginTop: 10,
+		padding: '0 15px',
+	},
+	selectedProductDescriptionText: {
+		fontSize: 16,
+		lineHeight: 1.2,
+	},
 	buttonAddToCard: {
 		position: 'fixed',
 		bottom: 10,
@@ -57,6 +65,8 @@ const ProductComponent = ({addProductToBasket, setDisabledAddToBasket, setDisabl
 	const product = useSelector(state => state.product.product)
 	const diagram = useSelector(state => state.product.product.assemblyDiagram.alias)
 	const field = product.unit ? 'unit' : product.product ? 'product' : 'promotion'
+
+	console.log(product)
 
 	useEffect(() => {
 		let disabledAddToBasket = true
@@ -119,6 +129,16 @@ const ProductComponent = ({addProductToBasket, setDisabledAddToBasket, setDisabl
 						{product.price} &#8381;
 					</p>
 				</div>
+				{product.unit && product.unit.description ? (
+					<div style={styles.selectedProductDescription}>
+						<p style={styles.selectedProductDescriptionText}>{product.unit.description}</p>
+					</div>
+				) : null}
+				{product.product && product.product.description ? (
+					<div style={styles.selectedProductDescription}>
+						<p style={styles.selectedProductDescriptionText}>{product.product.description}</p>
+					</div>
+				) : null}
 				{diagram === diagrams.PIECE_PRODUCT ||
 				diagram === diagrams.PIECE_PRODUCT_AND_ONE_SAUCE ||
 				diagram === diagrams.PIECE_PRODUCT_AND_ONE_SWEET_SAUCE ? (

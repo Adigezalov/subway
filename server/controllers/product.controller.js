@@ -33,9 +33,12 @@ module.exports.create = async function (req, res, next) {
 			helpers.clientErrorHandler(res, 400, errorText.ERROR_3)
 		}
 
+		console.log(req.body)
+
 		const item = new Model({
 			name: req.body.name,
 			alias: req.body.alias,
+			description: req.body.description,
 			menuItem: req.body.menuItem,
 			modifiers: JSON.parse(req.body.modifiers),
 		})

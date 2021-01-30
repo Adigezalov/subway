@@ -13,6 +13,8 @@ const ExtraChooseComponent = ({double}) => {
 		dispatch(setExtraAction(extra))
 	}
 
+	console.log(extras)
+
 	return (
 		<div style={styles.section}>
 			<p style={styles.sectionTitle}>Сделайте сытнее</p>
@@ -23,6 +25,7 @@ const ExtraChooseComponent = ({double}) => {
 						.sort((a, b) => (a.position > b.position ? 1 : -1))
 						.map((extra, i) => {
 							const price = double ? extra.price * 2 : extra.price
+							const weight = double ? extra.extra.weight * 2 : extra.extra.weight
 							const position = {_id: extra._id, name: extra.extra.name, price: price}
 							let active = false
 							extraProduct.map(item => {
@@ -38,6 +41,7 @@ const ExtraChooseComponent = ({double}) => {
 									position={position}
 									image={extra.extra.image}
 									price={price}
+									weight={weight}
 									setChoose={() => setChoose(position)}
 								/>
 							)

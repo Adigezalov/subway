@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams, useHistory} from 'react-router-dom'
 import cyrillicToTranslit from 'cyrillic-to-translit-js'
-import {Box, Button, Fab, IconButton, TextField, Typography} from '@material-ui/core'
+import {Box, Button, Fab, IconButton, InputAdornment, TextField, Typography} from '@material-ui/core'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import CheckIcon from '@material-ui/icons/Check'
 import {cleanExtraAction, createExtraAction, fetchExtraAction} from '../redux/actions/extra.actions'
@@ -20,7 +20,7 @@ const EditExtraPage = () => {
 	const extra = useSelector(state => state.extra.extra)
 	const create = useSelector(state => state.app.create)
 	const [isNew, setIsNew] = useState(false)
-	const [editItem, setEditItem] = useState({name: '', alias: '', image: ''})
+	const [editItem, setEditItem] = useState({name: '', alias: '', image: '', weight: ''})
 	const [disabled, setDisabled] = useState(true)
 	const [previewImage, setPreviewImage] = useState(null)
 
@@ -119,6 +119,19 @@ const EditExtraPage = () => {
 					value={editItem.alias}
 					disabled={!isNew}
 					onChange={event => handleChangeField(event, 'alias')}
+				/>
+			</Box>
+			<Box mt={2}>
+				<TextField
+					size={'small'}
+					fullWidth
+					variant={'outlined'}
+					label={'Вес'}
+					value={editItem.weight}
+					onChange={event => handleChangeField(event, 'weight')}
+					InputProps={{
+						endAdornment: <InputAdornment position='end'>грамм</InputAdornment>,
+					}}
 				/>
 			</Box>
 			<Box position={'fixed'} right={20} bottom={20}>

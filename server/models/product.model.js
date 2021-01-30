@@ -8,6 +8,7 @@ const productSchema = new Schema({
 	alias: {type: String, required: true, unique: true},
 	position: {type: Number, required: true, unique: true},
 	image: {type: String, default: defaultImage.PRODUCT},
+	description: {type: String},
 	menuItem: {
 		ref: 'menuItems',
 		type: Schema.Types.ObjectId,
