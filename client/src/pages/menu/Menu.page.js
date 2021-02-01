@@ -129,7 +129,14 @@ const MenuPage = () => {
 	}
 
 	return (
-		<div style={{flexGrow: 1, display: 'flex', flexDirection: 'column', paddingBottom: footerHeight}}>
+		<div
+			style={{
+				flexGrow: 1,
+				display: 'flex',
+				flexDirection: 'column',
+				paddingBottom: footerHeight,
+			}}
+		>
 			<div ref={parentRef} style={{...styles.menuContainer, top: headerHeight - 2}}>
 				{menu &&
 					menu.menuItems &&
@@ -193,8 +200,18 @@ const MenuPage = () => {
 						})}
 			</div>
 			{menu && menu.menuItems ? (
-				<div style={{...styles.swiperContainer, paddingTop: 26}}>
-					<SwipeableViews index={menuItem} onSwitching={index => handleSlideMenu(Math.round(index))}>
+				<div
+					style={{
+						...styles.swiperContainer,
+						paddingTop: 26,
+						minHeight: window.innerHeight - footerHeight - headerHeight - menuHeight,
+					}}
+				>
+					<SwipeableViews
+						index={menuItem}
+						onSwitching={index => handleSlideMenu(Math.round(index))}
+						animateHeight={true}
+					>
 						{STANDARD_MENU.map((item, i) => {
 							return (
 								<MenuListComponent
