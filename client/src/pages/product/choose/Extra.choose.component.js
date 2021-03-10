@@ -13,8 +13,6 @@ const ExtraChooseComponent = ({double}) => {
 		dispatch(setExtraAction(extra))
 	}
 
-	console.log(extras)
-
 	return (
 		<div style={styles.section}>
 			<p style={styles.sectionTitle}>Сделайте сытнее</p>

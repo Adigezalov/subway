@@ -1,8 +1,11 @@
-const Telegraf = require('telegraf')
+const {Markup} = require('telegraf')
 const Restaurant = require('../models/restaurant.model')
+const Customer = require('../models/customer.model')
+const Order = require('../models/order.model')
 const helpers = require('../helpers')
 const moment = require('moment')
 const keys = require('../config')
+const bot = require('../bot/bot')
 
 module.exports.order = async (req, res) => {
 	const order = JSON.parse(req.body.order)
@@ -11,14 +14,6 @@ module.exports.order = async (req, res) => {
 	if (!order.basket.length) {
 		helpers.clientErrorHandler(res, 400, 'Мы не можем принять у Вас пустой заказ')
 	}
-
-	const bot = new Telegraf(keys.TELEGRAM_BOT_TOKEN, {
-		// telegram: {
-		//   agent: new HttpsProxyAgent(
-		//     `http://${keys.PROXY_USER}:${keys.PROXY_PASSWORD}@${keys.PROXY_URL}:${keys.PROXY_PORT}`
-		//   ),
-		// },
-	})
 
 	let noError = true
 
@@ -92,18 +87,39 @@ module.exports.order = async (req, res) => {
 			}
 			orderToTelegram += price
 
-			let sendOrder = await bot.telegram.sendMessage(`-${restaurant.telegramGroupId}`, orderToTelegram, {
+			const phoneNumber = parseInt(phone.replace(/\D+/g, ''))
+
+			let findCustomer
+
+			findCustomer = await Customer.findOne({phone: phoneNumber})
+
+			if (!findCustomer) {
+				await Customer.create({name: order.order.name, phone: phoneNumber})
+				findCustomer = await Customer.findOne({phone: phoneNumber})
+			}
+
+			if (findCustomer.telegramId) {
+				const orderToClient = `*Ваш заказ отправлен:*\n\n${orderToTelegram}`
+				await bot.telegram.sendMessage(findCustomer.telegramId, orderToClient, {
+					parse_mode: 'Markdown',
+				})
+			}
+
+			const createdOrder = await Order.create({
+				orderNumber: orderNumberTime,
+				order: orderToTelegram,
+				customer: findCustomer._id,
+			})
+
+			const orderToRestaurant = `${orderToTelegram}\n\n*Получен:* ${moment(createdOrder.createdAt).format(
+				'HH:mm:ss'
+			)}`
+
+			let sendOrder = await bot.telegram.sendMessage(`-${restaurant.telegramGroupId}`, orderToRestaurant, {
 				parse_mode: 'Markdown',
-				// reply_markup: {
-				// 	inline_keyboard: [
-				// 		[
-				// 			{
-				// 				text: 'Принял',
-				// 				callback_data: '1',
-				// 			},
-				// 		],
-				// 	],
-				// },
+				...Markup.inlineKeyboard([
+					[Markup.button.callback(`Принять`, `accept_${JSON.stringify({o: createdOrder.id})}`)],
+				]),
 			})
 
 			if (!!sendOrder.message_id) {

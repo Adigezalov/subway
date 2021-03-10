@@ -8,4 +8,5 @@ module.exports = {
 	TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
 	PORT: process.env.APP_PORT,
 	IP: process.env.APP_IP,
+	ORDER_CHAT_ID: process.env.ORDER_CHAT_ID,
 }

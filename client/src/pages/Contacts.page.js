@@ -108,6 +108,9 @@ const ContactsPage = () => {
 					<Link to='/policy'>
 						<p style={styles.oferta}>Соглашение на обработку персональных данных</p>
 					</Link>
+					<a href='https://t.me/subway_club_bot'>
+						<p style={styles.oferta}>Telegram-бот для уведомлений</p>
+					</a>
 				</ContainerComponent>
 			</div>
 			<div style={{...styles.map, maxHeight: mapHeight}}>

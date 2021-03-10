@@ -8,6 +8,7 @@ import {
 } from './app.actions'
 import axios from 'axios'
 import config from '../../config/config'
+import colors from '../../config/colors'
 import {cleanBasketAction} from './basket.actions'
 
 export function sendOrderAction(order) {
@@ -34,8 +35,21 @@ export function sendOrderAction(order) {
 				let text = ''
 				if (response.data.service) {
 					text = `Ваш заказ №${response.data.orderNumberTime} на сумму ${response.data.price}руб. будет доставлен по адресу ${response.data.address} в течение 35 минут.`
+					text = (
+						<a href='https://t.me/subway_club_bot' style={{color: colors.COLOR_INACTIVE}}>
+							Ваш заказ №{response.data.orderNumberTime} на сумму {response.data.price}руб. будет
+							доставлен по адресу {response.data.address} в течение 40 минут. Для отслеживания готовности
+							Вашего заказа нажмите на уведомление и подключитесь к нашему Telegram-боту.
+						</a>
+					)
 				} else {
-					text = `Ваш заказ №${response.data.orderNumberTime} на сумму ${response.data.price}руб. будет готов к ${response.data.time}`
+					text = (
+						<a href='https://t.me/subway_club_bot' style={{color: colors.COLOR_INACTIVE}}>
+							Ваш заказ №{response.data.orderNumberTime} на сумму {response.data.price}руб. будет готов к{' '}
+							{response.data.time}. Для отслеживания готовности Вашего заказа нажмите на уведомление и
+							подключитесь к нашему Telegram-боту.
+						</a>
+					)
 				}
 				dispatch(showSuccessAction(text))
 			}

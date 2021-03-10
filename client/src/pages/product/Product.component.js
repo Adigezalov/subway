@@ -66,8 +66,6 @@ const ProductComponent = ({addProductToBasket, setDisabledAddToBasket, setDisabl
 	const diagram = useSelector(state => state.product.product.assemblyDiagram.alias)
 	const field = product.unit ? 'unit' : product.product ? 'product' : 'promotion'
 
-	console.log(product)
-
 	useEffect(() => {
 		let disabledAddToBasket = true
 		let disabledAddToBasketText = ''
